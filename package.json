@@ -1,0 +1,20 @@
+{
+  "name": "password-generator",
+  "version": "1.0.0",
+  "description": "generate a password",
+  "preferGlobal": true,
+  "bin": "./pass-gen.js",
+  "main": "pass-gen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "password",
+    "nodejs"
+  ],
+  "author": "Me",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^8.3.0"
+  }
+}
