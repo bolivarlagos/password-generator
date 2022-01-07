@@ -28,5 +28,4 @@ if(length > 30){
 }
 
 const generatedPassword = createPassword(sec, length)
-
 console.log(sec, length, write, display)
