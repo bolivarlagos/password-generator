@@ -2,13 +2,13 @@
 
 const { program, Option } = require("commander")
 const { version } = require("./package.json")
+const createPassword  = require("./passwordHandler")
+
+const securityOption = new Option("-s, --sec <security>", "Define the password security")
 
 program.version(version, "-v, --version", "Display the current version of the program")
 
-program
-    .addOption(new Option("-s, --sec <security>", "Define the password security")
-        .default("medium")
-        .choices(["weak", "medium", "strong"]))
+program.addOption(securityOption.default("medium").choices(["weak", "medium", "strong"]))
 
 program
     .option("-l, --length <number>", "Password size", "8")
@@ -26,5 +26,7 @@ let { sec, length, write, display } = program.opts()
 if(length > 30){
     length = 30
 }
+
+const generatedPassword = createPassword(sec, length)
 
 console.log(sec, length, write, display)
