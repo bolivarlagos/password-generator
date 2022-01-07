@@ -3,66 +3,72 @@ const generateCharacteres = (charTypes) => {
     let start
     let end
 
+    const setValuesForStartAndEnd = (starting, ending) => {
+        start = starting 
+        end = ending 
+    }
+
     switch(charTypes){
         case "small":
-            start = 97
-            end = 123
-            for(let i = start; i < end; i++){
-                allCharacteres += String.fromCharCode(i)
-            }
+            setValuesForStartAndEnd(97, 123)        
             break
         case "big":
-            start = 65
-            end = 91
-            for(let i = start; i < end; i++){
-                allCharacteres += String.fromCharCode(i)
-            }
+            setValuesForStartAndEnd(65, 91)
             break
         case "numbers":
-            start = 48
-            end = 58
-            for(let i = start; i < end; i++){
-                allCharacteres += String.fromCharCode(i)
-            }
+            setValuesForStartAndEnd(48, 58)
             break
         case "symbols":
-            allCharacteres = "!@#$%&()+-*/=?[]"
-            break 
+            return "!@#$%&()+-*/=?[]"
         default:
             console.log("Not expected")
-            break           
+            return            
     }
+
+    for(let i = start; i < end; i++){
+        allCharacteres += String.fromCharCode(i)
+    }
+
     return allCharacteres
+}
 
-
+const generateRandomNumberForAllCharacters = (allChars) => {
+    return Math.floor(Math.random() * allChars.length)
 }
 
 const createPassword = (security, size) => {
-    let allCharacteresCombined = ""
+    let allCharactersCombined = ""
     let finalPassword = ""
+
     const small = generateCharacteres("small")
     const big = generateCharacteres("big")
     const numbers = generateCharacteres("numbers")
     const symbols = generateCharacteres("symbols")
 
+    if(size > 30){
+        size = 30
+    }
+
     switch(security){
         case "weak":
-            allCharacteresCombined = small
+            allCharactersCombined = small
             break
         case "medium":
-            allCharacteresCombined = small + numbers
+            allCharactersCombined = small + numbers
             break 
         case "strong":            
-            allCharacteresCombined = small + big + numbers + symbols
+            allCharactersCombined = small + big + numbers + symbols
             break 
         default:
             console.log("Not expected")
-            break            
+            return           
     }
+
     for(let i = 0; i < size; i++){
-        const ramdomNumberAllCharacteres = Math.floor(Math.random() * allCharacteresCombined.length)
-        finalPassword += allCharacteresCombined[ramdomNumberAllCharacteres]
+        const randomNumber = generateRandomNumberForAllCharacters(allCharactersCombined)
+        finalPassword += allCharactersCombined[randomNumber]
     }
+
     return finalPassword
 }
 

@@ -23,9 +23,7 @@ program.parse()
 
 let { sec, length, write, display } = program.opts()
 
-if(length > 30){
-    length = 30
-}
-
 const generatedPassword = createPassword(sec, length)
-console.log(sec, length, write, display)
+
+console.log(generatedPassword.length)
+console.log(generatedPassword)
